@@ -1,0 +1,46 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: mysql
+
+resources:
+  - mysql-namespace.yaml
+  - mysql-secret.yaml
+  - mysql-configmap.yaml
+  - mysql-pvc.yaml
+  - mysql-deployment.yaml
+  - mysql-service.yaml
+
+# Common Labels hinzufügen
+commonLabels:
+  app: mysql
+  managed-by: argocd
+  version: "8.0"
+
+# Images standardisieren
+images:
+  - name: mysql
+    newName: mysql
+    newTag: "8.0"
+
+# Replicas anpassen (optional)
+replicas:
+  - name: mysql
+    count: 1
+
+# ConfigMap-Namen ändern (z.B. mit Suffix für Versionierung)
+configMapGenerator:
+  - name: mysql-config
+    behavior: create
+    files:
+      - my.cnf=mysql-config.cnf
+
+# Var-Substitution aktivieren
+vars:
+  - name: NAMESPACE
+    objref:
+      kind: Namespace
+      name: mysql
+      apiVersion: v1
+    fieldref:
+      fieldpath: metadata.name

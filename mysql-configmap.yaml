@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: mysql
+data:
+  my.cnf: |
+    [mysqld]
+    default-storage-engine=InnoDB
+    character-set-server=utf8mb4
+    collation-server=utf8mb4_unicode_ci
+    max_connections=100
+    max_allowed_packet=256M
+    innodb_buffer_pool_size=256M
+    
+  init.sql: |
+    -- Optional: Zusätzliche Initialisierungsskripte
+    CREATE TABLE IF NOT EXISTS example_table (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
