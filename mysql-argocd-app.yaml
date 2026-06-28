@@ -6,7 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: ssh://git@github.com:ThomasPolzer/gitops-mysql.git # Änder dies zu deinem Git Repo
+    #repoURL: git@github.com:ThomasPolzer/gitops-mysql.git # Änder dies zu deinem Git Repo
+    repoURL: https://github.com/ThomasPolzer/gitops-mysql.git
     targetRevision: HEAD
     path: mysql
   destination:
