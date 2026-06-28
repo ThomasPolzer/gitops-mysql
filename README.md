@@ -85,7 +85,7 @@ mysql -h mysql.mysql.svc.cluster.local -u myapp_user -p
 ### Option 2: Port Forwarding
 ```bash
 ## FÜR ZUGRIFF VOM HOST (also z.B. mit SQL-Workbench unbedingt notwendig!)
-kubectl port-forward -n mysql svc/mysql 3306:3306
+nohup kubectl port-forward -n mysql svc/mysql 3306:3306 > /dev/null 2>&1 &
 mysql -h 127.0.0.1 -u myapp_user -p
 ```
 

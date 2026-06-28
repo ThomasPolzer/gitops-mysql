@@ -89,8 +89,8 @@ deploy_mysql() {
     print_success "MySQL ist bereit"
 
     # Port-Weiterleitung auf Host zum Zugriff via MySQL-Workbench o.ä. 
-    kubectl port-forward -n mysql svc/mysql 3306:3306
-    print_success "Port-Weiterleitung eingerichtet"
+    #kubectl port-forward -n mysql svc/mysql 3306:3306
+    #print_success "Port-Weiterleitung eingerichtet"
 }
 
 # Deploy ArgoCD Application
