@@ -87,6 +87,10 @@ deploy_mysql() {
     print_warning "Warte auf MySQL Pod-Start..."
     kubectl wait --for=condition=ready pod -l app=mysql -n mysql --timeout=120s
     print_success "MySQL ist bereit"
+
+    # Port-Weiterleitung auf Host zum Zugriff via MySQL-Workbench o.ä. 
+    kubectl port-forward -n mysql svc/mysql 3306:3306
+    print_success "Port-Weiterleitung eingerichtet"
 }
 
 # Deploy ArgoCD Application
